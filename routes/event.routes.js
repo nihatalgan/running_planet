@@ -12,12 +12,12 @@ router.get("/event/:id", (req, res, next) => {
 });
 
 /* GET - show event create page */
-router.get("/event/:id/create", (req, res, next) => {
+router.get("/event/create", (req, res, next) => {
     res.render("index");
 });
 
 /* POST - event create - handling the data from event create form*/
-router.post("/event/:id/create", (req, res, next) => {
+router.post("/event/create", (req, res, next) => {
     res.render("index");
 });
 

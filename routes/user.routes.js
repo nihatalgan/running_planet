@@ -12,9 +12,8 @@ router.get("/user/profile/edit", (req, res, next) => {
 });
 
 /* POST user profile edit - handling the data from user profile edit form*/
-router.get("/user/profile/edit", (req, res, next) => {
+router.post("/user/profile/edit", (req, res, next) => {
     res.render("index");
 });
-
 
 module.exports = router;
