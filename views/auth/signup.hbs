@@ -2,23 +2,44 @@
   <h2>Sign Up</h2>
   <form action="/auth/signup" method="POST">
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
+    <label>
+      Name
+      <input type="text" name="name" placeholder="Your name" />
+    </label>
+    <label>
+      Surname
+      <input type="text" name="surname" placeholder="Your surname" />
     </label>
 
-    <label> Email
+    <label>
+      Email
       <input type="email" name="email" placeholder="Your email" />
     </label>
 
-    <label> Password
+    <label>
+      Birthday
+      <input type="date" value="2024-01-01" name="birthday" />
+    </label>
+
+    <label>
+      Gender
+      <select name="gender" value=" " placeholder="Gender">
+        <option value="">select gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </label>
+
+    <label>
+      Password
       <input type="password" name="password" placeholder="Your password" />
     </label>
 
     <button type="submit">Sign Up</button>
 
-
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
+
   </form>
 </div>

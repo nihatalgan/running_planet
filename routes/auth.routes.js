@@ -22,13 +22,12 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
+  const { name, surname, gender, email, birthday, password } = req.body;
 
-  // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  // Check that name, email, and password are provided
+  if (name === "" || email === "" || password === "") {
     res.status(400).render("auth/signup", {
-      errorMessage:
-        "All fields are mandatory. Please provide your username, email and password.",
+      errorMessage: "Please provide your name, email and password.",
     });
 
     return;
@@ -61,7 +60,14 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
+      return User.create({
+        name,
+        surname,
+        email,
+        birthday,
+        gender,
+        password: hashedPassword,
+      });
     })
     .then((user) => {
       res.redirect("/auth/login");
@@ -72,7 +78,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
           errorMessage:
-            "Username and email need to be unique. Provide a valid username or email.",
+            "name and email need to be unique. Provide a valid name or email.",
         });
       } else {
         next(error);
@@ -87,13 +93,13 @@ router.get("/login", isLoggedOut, (req, res) => {
 
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-  // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  // Check that name, email, and password are provided
+  if (name === "" || email === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
-        "All fields are mandatory. Please provide username, email and password.",
+        "All fields are mandatory. Please provide name, email and password.",
     });
 
     return;
@@ -118,7 +124,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         return;
       }
 
-      // If user is found based on the username, check if the in putted password matches the one saved in the database
+      // If user is found based on the name, check if the in putted password matches the one saved in the database
       bcrypt
         .compare(password, user.password)
         .then((isSamePassword) => {

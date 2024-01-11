@@ -9,7 +9,6 @@ const userSchema = new Schema(
     },
     surname: {
       type: String,
-      required: false,
     },
     email: {
       type: String,
@@ -18,9 +17,12 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
+    birthday: {
+      type: Date,
+    },
     gender: {
       type: String,
-      enum: ["Male", "Female", "No comment"],
+      enum: ["male", "female"],
     },
 
     password: {
