@@ -17,7 +17,7 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
-    birthday: {
+    birthdate: {
       type: Date,
     },
     gender: {

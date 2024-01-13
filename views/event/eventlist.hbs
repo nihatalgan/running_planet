@@ -1,0 +1,14 @@
+<h1>Events</h1>
+
+{{#each events}}
+  <div>
+
+    <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" />
+    <h3><a href="/books/{{_id}}">{{name}}</a></h3>
+
+    {{!-- <p>{{location}}</p>
+    <p>{{distance}}</p>
+    <p><a href={{website}}>{{website}}</a></p> --}}
+
+  </div>
+{{/each}}

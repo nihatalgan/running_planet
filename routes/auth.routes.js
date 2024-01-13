@@ -22,7 +22,7 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { name, surname, gender, email, birthday, password } = req.body;
+  const { name, surname, gender, email, birthdate, password } = req.body;
 
   // Check that name, email, and password are provided
   if (name === "" || email === "" || password === "") {
@@ -64,7 +64,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         name,
         surname,
         email,
-        birthday,
+        birthdate,
         gender,
         password: hashedPassword,
       });
