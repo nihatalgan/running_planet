@@ -62,4 +62,8 @@ module.exports = (app) => {
       }),
     })
   );
+  app.use(function (req, res, next) {
+    app.locals.loggedIn = req.session.currentUser;
+    next();
+  });
 };

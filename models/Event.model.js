@@ -8,21 +8,25 @@ const eventSchema = new Schema(
       required: true,
     },
     date: { type: Date, default: Date.now },
-    location: { address: String, city: String },
+    location: { type: String },
 
     distance: {
       type: String,
-      enum: ["5k", "10k", "Half Marathon", "Full Marathon"],
+      enum: ["5k", "10k", "Half Marathon", "Marathon"],
     },
-    discription: {
+    description: {
       type: String,
-      required: false,
+      trim: true,
     },
     website: {
       type: String,
       required: true,
     },
-    
+    imageUrl: {
+      type: String,
+      default:
+        "https://www.utrechtmarathon.com/media/11979/lddk-20230521-0083.jpg?anchor=center&mode=crop&width=550&height=400&rnd=133470474780000000",
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

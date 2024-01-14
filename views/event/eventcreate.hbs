@@ -1,0 +1,48 @@
+<div id="form">
+  <h2>Create an event</h2>
+  <form action="/event/create" method="POST">
+
+    <label>
+      Name:
+      <input type="text" name="name" placeholder="Event name" />
+    </label>
+
+    <label>
+      Date:
+      <input type="date" value="date" name="date" />
+    </label>
+
+    <label>
+      Location:
+      <input type="text" name="location" placeholder="Location" />
+    </label>
+
+    <label>
+      Distance:
+      <select name="distance" value=" " placeholder="Distance">
+        <option value="">select distance</option>
+        <option value="5k">5k</option>
+        <option value="10k">10k</option>
+        <option value="halfmarathon">Half Marathon</option>
+        <option value="marathon">Marathon</option>
+      </select>
+    </label>
+
+    <label>
+      Description:
+      <textarea name="description" cols="30" rows="4"> </textarea>
+    </label>
+
+    <label>
+      Website:
+      <input type="text" name="website" placeholder="Website" />
+    </label>
+
+    <button type="submit">submit</button>
+
+    {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+
+  </form>
+</div>
