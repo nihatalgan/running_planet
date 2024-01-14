@@ -9,6 +9,21 @@
   </head>
 
   <body>
+    {{#if sess}}
+      <nav>
+        <a href="/">Running Planet</a>
+        <a href="/event/list">Events</a>
+        <a href="/">Profile</a>
+        <a href="/">Sign out</a>
+      </nav>
+    {{else}}
+      <nav>
+        <a href="/">Running Planet</a>
+        <a href="/event/list">Events</a>
+        <a href="/auth/login">Login</a>
+        <a href="/auth/signup">Signup</a>
+      </nav>
+    {{/if}}
 
     {{{body}}}
 
