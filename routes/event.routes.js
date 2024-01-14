@@ -8,12 +8,15 @@ router.get("/list", (req, res, next) => {
 
 /* GET - show event details page */
 router.get("/:id", (req, res, next) => {
-    res.render("index");
+    
+    const isLoggedIn = Boolean(req.session.currentUser);
+    res.render("index", { isLoggedIn });
 });
 
 /* GET - show event create page */
 router.get("/create", (req, res, next) => {
-    res.render("index");
+    const isLoggedIn = Boolean(req.session.currentUser);
+    res.render("index", { isLoggedIn });
 });
 
 /* POST - event create - handling the data from event create form*/
@@ -24,7 +27,9 @@ router.post("/create", (req, res, next) => {
 
 /* GET - show user profile edit page */
 router.get("/:id/edit", (req, res, next) => {
-    res.render("index");
+
+    const isLoggedIn = Boolean(req.session.currentUser);
+    res.render("index", { isLoggedIn });
 });
 
 /* POST - event edit - handling the data from event edit form*/
