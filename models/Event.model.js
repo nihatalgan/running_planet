@@ -12,7 +12,7 @@ const eventSchema = new Schema(
 
     distance: {
       type: String,
-      enum: ["5k", "10k", "Half Marathon", "Marathon"],
+      enum: ["5k", "10k", "half-marathon", "marathon"],
     },
     description: {
       type: String,
