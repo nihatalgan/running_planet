@@ -17,6 +17,13 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
     birthdate: {
       type: Date,
     },
@@ -24,7 +31,6 @@ const userSchema = new Schema(
       type: String,
       enum: ["male", "female"],
     },
-
     password: {
       type: String,
       required: true,
