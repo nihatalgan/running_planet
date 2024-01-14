@@ -1,5 +1,5 @@
 <div id="form">
-  <h2>Create an event</h2>
+  <h2>Edit "{{name}}" event</h2>
   <form action="/event/create" method="POST">
 
     <label>
@@ -19,11 +19,11 @@
 
     <label>
       Distance:
-      <select name="distance" value=" " value="{{distance}}">
+      <select name="distance">
         <option value="">select distance</option>
         <option value="5k">5k</option>
         <option value="10k">10k</option>
-        <option value="halfmarathon">Half Marathon</option>
+        <option value="half-marathon">Half Marathon</option>
         <option value="marathon">Marathon</option>
       </select>
     </label>
@@ -40,6 +40,7 @@
     </label>
 
     <button type="submit">Edit</button>
+    <a href="/event/{{id}}">Go Back</a>
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

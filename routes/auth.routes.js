@@ -66,6 +66,11 @@ router.post("/signup", isLoggedOut, (req, res) => {
         email,
         birthdate,
         gender,
+        
+        // because sign-up is failing when we create 2 or more user. 
+        //adding username field fixes the issue
+        username: email, 
+
         password: hashedPassword,
       });
     })
@@ -73,6 +78,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       res.redirect("/auth/login");
     })
     .catch((error) => {
+      console.log(error);
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(500).render("auth/signup", { errorMessage: error.message });
       } else if (error.code === 11000) {
@@ -140,7 +146,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           // Remove the password field
           delete req.session.currentUser.password;
 
-          res.redirect("/");
+          res.redirect("/event/list");
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
     })
