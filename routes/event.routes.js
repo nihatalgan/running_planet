@@ -12,7 +12,6 @@ router.get("/create", (req, res, next) => {
 
 /* POST - event create - handling the data from event create form*/
 router.post("/create", (req, res, next) => {
-  console.log(req.body);
   const { name, date, location, distance, description, website } = req.body;
   const organiser = req.session.currentUser._id
   Event.create({
@@ -25,9 +24,7 @@ router.post("/create", (req, res, next) => {
     organiser,
   })
     .then((newEvent) => {
-      console.log(newEvent);
-      //   res.render("event/eventlist", { event: newEvent });
-      res.redirect("/event/list");
+      res.redirect(`/event/${newEvent.id}`);
     })
     .catch((error) =>
       console.log(`Error while creating a new event: ${error}`)
