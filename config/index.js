@@ -63,7 +63,7 @@ module.exports = (app) => {
     })
   );
   app.use(function (req, res, next) {
-    app.locals.sess = req.session.currentUser;
+    app.locals.loggedIn = req.session.currentUser;
     next();
   });
 };

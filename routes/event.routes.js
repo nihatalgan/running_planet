@@ -45,7 +45,18 @@ router.get("/list", (req, res, next) => {
 });
 
 /* GET - show Event profile edit page */
-router.get("/:id/edit", (req, res, next) => {
+// router.get("/:id/edit", (req, res, next) => {
+//   const { id } = req.params;
+
+//   Event.findById(id)
+//     .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
+//     .catch((error) =>
+//       console.log(`Error while getting a single movie for edit: ${error}`)
+//     );
+// });
+
+/* POST - event edit - handling the data from event edit form*/
+router.post("/:id/edit", (req, res, next) => {
   const { id } = req.params;
 
   Event.findById(id)
@@ -55,19 +66,16 @@ router.get("/:id/edit", (req, res, next) => {
     );
 });
 
-/* POST - event edit - handling the data from event edit form*/
-router.post("/:id/edit", (req, res, next) => {
-  res.render("index");
-});
-
 /* POST - event delete - handling the data for event deletion*/
 router.post("/:id/delete", (req, res, next) => {
-  res.render("index");
+  const { id } = req.params;
+  Event.findByIdAndDelete(id)
+    .then(() => res.redirect("/event/list"))
+    .catch((err) => console.log(err));
 });
 
 /* GET - show event details page */
 router.get("/:id", (req, res, next) => {
-  console.log(req.params);
   const { id } = req.params;
   Event.findById(id)
     .then((event) => {
