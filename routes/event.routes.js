@@ -35,14 +35,10 @@ router.post("/create", (req, res, next) => {
 
 /* GET - show events listing page */
 router.get("/list", (req, res, next) => {
-
-    
-    const isLoggedIn = Boolean(req.session.currentUser);
-
     Event.find()
         .then((eventsFromDB) => {
         //   console.log(eventsFromDB);
-        res.render("event/eventlist.hbs", { events: eventsFromDB, isLoggedIn });
+        res.render("event/eventlist.hbs", { events: eventsFromDB });
         })
         .catch((err) =>
             console.log(`Error while getting the events from the DB: ${err}`)
@@ -71,13 +67,10 @@ router.post("/:id/delete", (req, res, next) => {
 /* GET - show event details page */
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
-
-  const isLoggedIn = Boolean(req.session.currentUser);
-
   Event.findById(id)
     .then((event) => {
       console.log(event);
-      res.render("event/eventdetails", { event, isLoggedIn });
+      res.render("event/eventdetails", { event });
     })
     .catch((error) =>
       console.log(`Error while getting a single event ${error}`)
@@ -87,10 +80,9 @@ router.get("/:id", (req, res, next) => {
 /* GET - show Event profile edit page */
 router.get("/:id/edit", (req, res, next) => {
     const { id } = req.params;
-    const isLoggedIn = Boolean(req.session.currentUser);
     
     Event.findById(id)
-        .then((eventToEdit) => res.render("event/eventedit", eventToEdit, isLoggedIn))
+        .then((eventToEdit) => res.render("event/eventedit", { eventToEdit }))
         .catch((error) =>
             console.log(`Error while getting a single movie for edit: ${error}`)
         );
