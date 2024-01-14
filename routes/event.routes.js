@@ -43,17 +43,6 @@ router.get("/list", (req, res, next) => {
     );
 });
 
-/* GET - show Event profile edit page */
-// router.get("/:id/edit", (req, res, next) => {
-//   const { id } = req.params;
-
-//   Event.findById(id)
-//     .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
-//     .catch((error) =>
-//       console.log(`Error while getting a single movie for edit: ${error}`)
-//     );
-// });
-
 /* POST - event edit - handling the data from event edit form*/
 router.post("/:id/edit", (req, res, next) => {
   const { id } = req.params;
@@ -87,6 +76,18 @@ router.get("/:id", (req, res, next) => {
     })
     .catch((error) =>
       console.log(`Error while getting a single event ${error}`)
+    );
+});
+
+
+/* GET - show Event profile edit page */
+router.get("/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+
+  Event.findById(id)
+    .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
+    .catch((error) =>
+      console.log(`Error while getting a single event for edit: ${error}`)
     );
 });
 

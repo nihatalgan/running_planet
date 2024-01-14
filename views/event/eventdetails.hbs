@@ -10,9 +10,9 @@
 <img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
 
 {{#if isOrganiser}}
-  <form action="/event/{{event.id}}/edit" method="post">
-    <button type="submit">Edit</button>
-  </form>
+  <a href="/event/{{event.id}}/edit">
+    <button type="button">Edit</button>
+  </a>
   <form action="/event/{{event.id}}/delete" method="post">
     <button type="submit">Delete</button>
   </form>
