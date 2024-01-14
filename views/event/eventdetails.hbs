@@ -1,4 +1,6 @@
-<h1>{{newEvent.name}}</h1>
+<h1>{{event.name}}</h1>
+<label for="">Organised by:</label>
+<h3>{{event.organiser.name}} {{event.organiser.surname}}</h3>
 <hr />
 <p>{{event.date}}</p>
 <p>{{event.location}}</p>
@@ -7,14 +9,14 @@
 <p><a href={{event.website}}>{{event.website}}</a></p>
 <img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
 
-<a href="/event/{{event.id}}/edit">Edit</a>
-
-<form action="/event/{{event.id}}/edit" method="post">
-  <button type="submit">Edit</button>
-</form>
-<form action="/event/{{event.id}}/delete" method="post">
-  <button type="submit">Delete</button>
-</form>
+{{#if isOrganiser}}
+  <form action="/event/{{event.id}}/edit" method="post">
+    <button type="submit">Edit</button>
+  </form>
+  <form action="/event/{{event.id}}/delete" method="post">
+    <button type="submit">Delete</button>
+  </form>
+{{/if}}
 
 {{!-- <p>Written by: {{book.author}}</p>
 <p>Summary: {{book.description}}</p>
