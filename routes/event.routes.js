@@ -14,7 +14,6 @@ router.get("/create", (req, res, next) => {
 router.post("/create", (req, res, next) => {
   console.log(req.body);
   const { name, date, location, distance, description, website } = req.body;
-  //   console.log("req.file", req.file);
   Event.create({
     name,
     date,
@@ -25,7 +24,8 @@ router.post("/create", (req, res, next) => {
   })
     .then((newEvent) => {
       console.log(newEvent);
-      res.redirect("create");
+      //   res.render("event/eventlist", { event: newEvent });
+      res.redirect("/event/list");
     })
     .catch((error) =>
       console.log(`Error while creating a new event: ${error}`)
@@ -44,23 +44,15 @@ router.get("/list", (req, res, next) => {
     );
 });
 
-// router.get('/movies', (req, res) => {
-//     Movie.find()
-//       .then(moviesFromDB => {
-//         // console.log(moviesFromDB);
-//         res.render('movie-views/movies-list.hbs', { movies: moviesFromDB });
-//       })
-//       .catch(err => console.log(`Error while getting the movies from the DB: ${err}`));
-//   });
-
-/* GET - show event details page */
-router.get("/:id", (req, res, next) => {
-  res.render("index");
-});
-
-/* GET - show user profile edit page */
+/* GET - show Event profile edit page */
 router.get("/:id/edit", (req, res, next) => {
-  res.render("index");
+  const { id } = req.params;
+
+  Event.findById(id)
+    .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
+    .catch((error) =>
+      console.log(`Error while getting a single movie for edit: ${error}`)
+    );
 });
 
 /* POST - event edit - handling the data from event edit form*/
@@ -71,6 +63,20 @@ router.post("/:id/edit", (req, res, next) => {
 /* POST - event delete - handling the data for event deletion*/
 router.post("/:id/delete", (req, res, next) => {
   res.render("index");
+});
+
+/* GET - show event details page */
+router.get("/:id", (req, res, next) => {
+  console.log(req.params);
+  const { id } = req.params;
+  Event.findById(id)
+    .then((event) => {
+      console.log(event);
+      res.render("event/eventdetails", { event });
+    })
+    .catch((error) =>
+      console.log(`Error while getting a single event ${error}`)
+    );
 });
 
 module.exports = router;

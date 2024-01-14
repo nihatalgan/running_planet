@@ -14,8 +14,9 @@ const eventSchema = new Schema(
       type: String,
       enum: ["5k", "10k", "Half Marathon", "Marathon"],
     },
-    discription: {
+    description: {
       type: String,
+      trim: true,
     },
     website: {
       type: String,

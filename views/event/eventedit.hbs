@@ -4,22 +4,22 @@
 
     <label>
       Name:
-      <input type="text" name="name" placeholder="Event name" />
+      <input type="text" name="name" value="{{name}}" />
     </label>
 
     <label>
       Date:
-      <input type="date" value="date" name="date" />
+      <input type="date" value="{{date}}" name="date" />
     </label>
 
     <label>
       Location:
-      <input type="text" name="location" placeholder="Location" />
+      <input type="text" name="location" value="{{location}}" />
     </label>
 
     <label>
       Distance:
-      <select name="distance" value=" " placeholder="Distance">
+      <select name="distance" value=" " value="{{distance}}">
         <option value="">select distance</option>
         <option value="5k">5k</option>
         <option value="10k">10k</option>
@@ -30,15 +30,16 @@
 
     <label>
       Description:
-      <textarea name="description" cols="30" rows="4"> </textarea>
+      <textarea name="description" cols="30" rows="4">{{description}}
+      </textarea>
     </label>
 
     <label>
       Website:
-      <input type="text" name="website" placeholder="Website" />
+      <input type="text" name="website" value="{{website}}" />
     </label>
 
-    <button type="submit">submit</button>
+    <button type="submit">Edit</button>
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
