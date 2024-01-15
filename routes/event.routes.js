@@ -47,10 +47,10 @@ router.get("/list", (req, res, next) => {
 router.post("/:id/edit", (req, res, next) => {
   const { id } = req.params;
 
-  Event.findById(id)
-    .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
+  Event.findByIdAndUpdate(id, req.body)
+    .then((eventEdited) => res.redirect(`/event/${eventEdited.id}`))
     .catch((error) =>
-      console.log(`Error while getting a single movie for edit: ${error}`)
+      console.log(`Error while getting a single event for edit: ${error}`)
     );
 });
 
