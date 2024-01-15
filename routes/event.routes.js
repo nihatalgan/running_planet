@@ -7,8 +7,7 @@ const Event = require("../models/Event.model");
 
 /* GET - show event create page */
 router.get("/create", (req, res, next) => {
-    const isLoggedIn = Boolean(req.session.currentUser);
-    res.render("event/eventcreate", { isLoggedIn });
+    res.render("event/eventcreate");
 });
 
 /* POST - event create - handling the data from event create form*/
