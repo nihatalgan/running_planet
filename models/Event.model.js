@@ -22,7 +22,6 @@ const eventSchema = new Schema(
       type: String,
       required: true,
     },
-
     imageUrl: {
       type: String,
       default:

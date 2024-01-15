@@ -7,7 +7,8 @@ const Event = require("../models/Event.model");
 
 /* GET - show event create page */
 router.get("/create", (req, res, next) => {
-  res.render("event/eventcreate");
+    const isLoggedIn = Boolean(req.session.currentUser);
+    res.render("event/eventcreate", { isLoggedIn });
 });
 
 /* POST - event create - handling the data from event create form*/
@@ -33,14 +34,14 @@ router.post("/create", (req, res, next) => {
 
 /* GET - show events listing page */
 router.get("/list", (req, res, next) => {
-  Event.find()
-    .then((eventsFromDB) => {
-      //   console.log(eventsFromDB);
-      res.render("event/eventlist.hbs", { events: eventsFromDB });
-    })
-    .catch((err) =>
-      console.log(`Error while getting the events from the DB: ${err}`)
-    );
+    Event.find()
+        .then((eventsFromDB) => {
+        //   console.log(eventsFromDB);
+        res.render("event/eventlist.hbs", { events: eventsFromDB });
+        })
+        .catch((err) =>
+            console.log(`Error while getting the events from the DB: ${err}`)
+        );
 });
 
 /* POST - event edit - handling the data from event edit form*/
@@ -78,7 +79,6 @@ router.get("/:id", (req, res, next) => {
       console.log(`Error while getting a single event ${error}`)
     );
 });
-
 
 /* GET - show Event profile edit page */
 router.get("/:id/edit", (req, res, next) => {

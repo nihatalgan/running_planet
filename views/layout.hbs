@@ -9,21 +9,35 @@
   </head>
 
   <body>
-    {{#if loggedIn}}
+    <header>
       <nav>
-        <a href="/">Running Planet</a>
-        <a href="/event/list">Events</a>
-        <a href="/">Profile</a>
-        <a href="/">Sign out</a>
+        <ul>
+          <li>
+            <a href="/">
+              <img src="" alt="logo">
+            </a>
+          </li>
+          <li>
+            <a href="/event/list">Events</a>
+          </li>
+          {{#if isLoggedIn}}
+            <li>
+              <a href="/user/profile">Profile</a>
+            </li>
+            <li>
+              <a href="/auth/logout">Logout</a>
+            </li>
+          {{else}}
+            <li>
+              <a href="/auth/login">Login</a>
+            </li>
+            <li>
+              <a href="/auth/signup">Signup</a>
+            </li>
+          {{/if}}
+        </ul>
       </nav>
-    {{else}}
-      <nav>
-        <a href="/">Running Planet</a>
-        <a href="/event/list">Events</a>
-        <a href="/auth/login">Login</a>
-        <a href="/auth/signup">Signup</a>
-      </nav>
-    {{/if}}
+    </header>
 
     {{{body}}}
 
