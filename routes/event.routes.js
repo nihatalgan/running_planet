@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
+const isLoggedIn = require("../middleware/isLoggedIn")
 // Require the Event model in order to interact with the database
 const Event = require("../models/Event.model");
 
 /* GET - show event create page */
-router.get("/create", (req, res, next) => {
-    res.render("event/eventcreate");
+router.get("/create", isLoggedIn, (req, res, next) => {
+  res.render("event/eventcreate");
 });
 
 /* POST - event create - handling the data from event create form*/
