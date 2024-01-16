@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const isLoggedIn = require("../middleware/isLoggedIn")
+const isLoggedIn = require("../middleware/isLoggedIn");
 // Require the Event model in order to interact with the database
 const Event = require("../models/Event.model");
 
@@ -13,7 +13,7 @@ router.get("/create", isLoggedIn, (req, res, next) => {
 /* POST - event create - handling the data from event create form*/
 router.post("/create", (req, res, next) => {
   const { name, date, location, distance, description, website } = req.body;
-  const organiser = req.session.currentUser._id
+  const organiser = req.session.currentUser._id;
   Event.create({
     name,
     date,
@@ -33,13 +33,13 @@ router.post("/create", (req, res, next) => {
 
 /* GET - show events listing page */
 router.get("/list", (req, res, next) => {
-    Event.find()
-        .then((eventsFromDB) => {
-        res.render("event/eventlist.hbs", { events: eventsFromDB });
-        })
-        .catch((err) =>
-            console.log(`Error while getting the events from the DB: ${err}`)
-        );
+  Event.find()
+    .then((eventsFromDB) => {
+      res.render("event/eventlist.hbs", { events: eventsFromDB });
+    })
+    .catch((err) =>
+      console.log(`Error while getting the events from the DB: ${err}`)
+    );
 });
 
 /* POST - event edit - handling the data from event edit form*/
@@ -65,7 +65,7 @@ router.post("/:id/delete", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
   Event.findById(id)
-    .populate('organiser')
+    .populate("organiser")
     .then((event) => {
       let isOrganiser = false;
       // error occured = Cannot read properties of undefined (reading '_id'):
@@ -73,10 +73,10 @@ router.get("/:id", (req, res, next) => {
       // session will be empty
       // to check if it is organiser
       // we need to know if session data is available
-      // and if currentUser is present in session 
+      // and if currentUser is present in session
       // and we need to check currentUser id is equal to event creator id
-      if(req.session.currentUser && req.session.currentUser._id) {
-        if( event.organiser.id === req.session.currentUser._id) {
+      if (req.session.currentUser && req.session.currentUser._id) {
+        if (event.organiser.id === req.session.currentUser._id) {
           isOrganiser = true;
         }
       }
@@ -88,7 +88,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 /* GET - show Event profile edit page */
-router.get("/:id/edit", (req, res, next) => {
+router.get("/:id/edit", isLoggedIn, (req, res, next) => {
   const { id } = req.params;
 
   Event.findById(id)
