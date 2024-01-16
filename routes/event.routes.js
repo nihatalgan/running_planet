@@ -35,7 +35,6 @@ router.post("/create", (req, res, next) => {
 router.get("/list", (req, res, next) => {
     Event.find()
         .then((eventsFromDB) => {
-        //   console.log(eventsFromDB);
         res.render("event/eventlist.hbs", { events: eventsFromDB });
         })
         .catch((err) =>
@@ -69,8 +68,17 @@ router.get("/:id", (req, res, next) => {
     .populate('organiser')
     .then((event) => {
       let isOrganiser = false;
-      if(req.session && req.session.currentUser && req.session.currentUser._id) {
-        isOrganiser = event.organiser.id === req.session.currentUser._id;
+      // error occured = Cannot read properties of undefined (reading '_id'):
+      // when guest user access this page
+      // session will be empty
+      // to check if it is organiser
+      // we need to know if session data is available
+      // and if currentUser is present in session 
+      // and we need to check currentUser id is equal to event creator id
+      if(req.session.currentUser && req.session.currentUser._id) {
+        if( event.organiser.id === req.session.currentUser._id) {
+          isOrganiser = true;
+        }
       }
       res.render("event/eventdetails", { event, isOrganiser });
     })
