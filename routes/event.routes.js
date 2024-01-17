@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const isLoggedIn = require("../middleware/isLoggedIn");
 // Require the Event model in order to interact with the database
 const Event = require("../models/Event.model");
+// ********* require fileUploader in order to use it *********
+const fileUploader = require("../config/cloudinary.config");
 
 /* GET - show event create page */
 router.get("/create", isLoggedIn, (req, res, next) => {
@@ -11,25 +13,30 @@ router.get("/create", isLoggedIn, (req, res, next) => {
 });
 
 /* POST - event create - handling the data from event create form*/
-router.post("/create", (req, res, next) => {
-  const { name, date, location, distance, description, website } = req.body;
-  const organiser = req.session.currentUser._id;
-  Event.create({
-    name,
-    date,
-    location,
-    distance,
-    description,
-    website,
-    organiser,
-  })
-    .then((newEvent) => {
-      res.redirect(`/event/${newEvent.id}`);
+router.post(
+  "/create",
+  fileUploader.single("event-cover-image"),
+  (req, res, next) => {
+    const { name, date, location, distance, description, website } = req.body;
+    const organiser = req.session.currentUser._id;
+    Event.create({
+      name,
+      date,
+      location,
+      distance,
+      description,
+      website,
+      imageUrl: req.file.path,
+      organiser,
     })
-    .catch((error) =>
-      console.log(`Error while creating a new event: ${error}`)
-    );
-});
+      .then((newEvent) => {
+        res.redirect(`/event/${newEvent.id}`);
+      })
+      .catch((error) =>
+        console.log(`Error while creating a new event: ${error}`)
+      );
+  }
+);
 
 /* GET - show events listing page */
 router.get("/list", (req, res, next) => {
@@ -43,15 +50,39 @@ router.get("/list", (req, res, next) => {
 });
 
 /* POST - event edit - handling the data from event edit form*/
-router.post("/:id/edit", (req, res, next) => {
-  const { id } = req.params;
+router.post(
+  "/:id/edit",
+  fileUploader.single("event-cover-image"),
+  (req, res, next) => {
+    const { id } = req.params;
+    const {
+      name,
+      date,
+      location,
+      distance,
+      description,
+      website,
+      existingImage,
+    } = req.body;
 
-  Event.findByIdAndUpdate(id, req.body)
-    .then((eventEdited) => res.redirect(`/event/${eventEdited.id}`))
-    .catch((error) =>
-      console.log(`Error while getting a single event for edit: ${error}`)
-    );
-});
+    let imageUrl;
+    if (req.file) {
+      imageUrl = req.file.path;
+    } else {
+      imageUrl = existingImage;
+    }
+
+    Event.findByIdAndUpdate(
+      id,
+      { name, date, location, distance, description, website, imageUrl },
+      { new: true }
+    )
+      .then((eventEdited) => res.redirect(`/event/${eventEdited.id}`))
+      .catch((error) =>
+        console.log(`Error while getting a single event for edit: ${error}`)
+      );
+  }
+);
 
 /* POST - event delete - handling the data for event deletion*/
 router.post("/:id/delete", (req, res, next) => {
