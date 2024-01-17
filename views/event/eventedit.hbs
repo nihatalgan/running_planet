@@ -1,6 +1,6 @@
 <div id="form">
   <h2>Edit "{{name}}" event</h2>
-  <form action="/event/{{id}}/edit" method="POST">
+  <form action="/event/{{id}}/edit" method="POST" enctype="multipart/form-data">
 
     <label>
       Name:
@@ -37,6 +37,11 @@
     <label>
       Website:
       <input type="text" name="website" value="{{website}}" />
+    </label>
+
+    <label>Image:
+      <input type="file" name="event-cover-image" />
+      <input type="text" name="existingImage" hidden value="{{imageUrl}}" />
     </label>
 
     <button type="submit">Save Changes</button>

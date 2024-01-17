@@ -1,6 +1,6 @@
 <div id="form">
   <h2>Create an event</h2>
-  <form action="/event/create" method="POST">
+  <form action="/event/create" method="POST" enctype="multipart/form-data">
 
     <label>
       Name:
@@ -36,6 +36,10 @@
     <label>
       Website:
       <input type="text" name="website" placeholder="Website" />
+    </label>
+
+    <label>Image:
+      <input type="file" name="event-cover-image" class="form-control-file" />
     </label>
 
     <button type="submit">submit</button>
