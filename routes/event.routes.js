@@ -49,6 +49,45 @@ router.get("/list", (req, res, next) => {
     );
 });
 
+/* GET - show event details page */
+router.get("/:id", (req, res, next) => {
+  const { id } = req.params;
+  Event.findById(id)
+    .populate("organiser")
+    .then((event) => {
+      let isOrganiser = false;
+      // error occured = Cannot read properties of undefined (reading '_id'):
+      // when guest user access this page
+      // session will be empty
+      // to check if it is organiser
+      // we need to know if session data is available
+      // and if currentUser is present in session
+      // and we need to check currentUser id is equal to event creator id
+      if (req.session.currentUser && req.session.currentUser._id) {
+        if (event.organiser.id === req.session.currentUser._id) {
+          isOrganiser = true;
+        }
+      }
+      res.render("event/eventdetails", { event, isOrganiser });
+    })
+    .catch((error) =>
+      console.log(`Error while getting a single event ${error}`)
+    );
+});
+
+/* GET - show Event  edit page */
+router.get("/:id/edit", isLoggedIn, (req, res, next) => {
+  const { id } = req.params;
+
+  Event.findById(id)
+    .then((eventToEdit) => {
+      res.render("event/eventedit", eventToEdit)
+    })
+    .catch((error) =>
+      console.log(`Error while getting a single event for edit: ${error}`)
+    );
+});
+
 /* POST - event edit - handling the data from event edit form*/
 router.post(
   "/:id/edit",
@@ -90,43 +129,6 @@ router.post("/:id/delete", (req, res, next) => {
   Event.findByIdAndDelete(id)
     .then(() => res.redirect("/event/list"))
     .catch((err) => console.log(err));
-});
-
-/* GET - show event details page */
-router.get("/:id", (req, res, next) => {
-  const { id } = req.params;
-  Event.findById(id)
-    .populate("organiser")
-    .then((event) => {
-      let isOrganiser = false;
-      // error occured = Cannot read properties of undefined (reading '_id'):
-      // when guest user access this page
-      // session will be empty
-      // to check if it is organiser
-      // we need to know if session data is available
-      // and if currentUser is present in session
-      // and we need to check currentUser id is equal to event creator id
-      if (req.session.currentUser && req.session.currentUser._id) {
-        if (event.organiser.id === req.session.currentUser._id) {
-          isOrganiser = true;
-        }
-      }
-      res.render("event/eventdetails", { event, isOrganiser });
-    })
-    .catch((error) =>
-      console.log(`Error while getting a single event ${error}`)
-    );
-});
-
-/* GET - show Event profile edit page */
-router.get("/:id/edit", isLoggedIn, (req, res, next) => {
-  const { id } = req.params;
-
-  Event.findById(id)
-    .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
-    .catch((error) =>
-      console.log(`Error while getting a single event for edit: ${error}`)
-    );
 });
 
 module.exports = router;
