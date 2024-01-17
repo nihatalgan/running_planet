@@ -42,25 +42,6 @@ router.get("/list", (req, res, next) => {
         );
 });
 
-/* POST - event edit - handling the data from event edit form*/
-router.post("/:id/edit", (req, res, next) => {
-  const { id } = req.params;
-
-  Event.findByIdAndUpdate(id, req.body)
-    .then((eventEdited) => res.redirect(`/event/${eventEdited.id}`))
-    .catch((error) =>
-      console.log(`Error while getting a single event for edit: ${error}`)
-    );
-});
-
-/* POST - event delete - handling the data for event deletion*/
-router.post("/:id/delete", (req, res, next) => {
-  const { id } = req.params;
-  Event.findByIdAndDelete(id)
-    .then(() => res.redirect("/event/list"))
-    .catch((err) => console.log(err));
-});
-
 /* GET - show event details page */
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
@@ -86,16 +67,39 @@ router.get("/:id", (req, res, next) => {
       console.log(`Error while getting a single event ${error}`)
     );
 });
-
-/* GET - show Event profile edit page */
+/* GET - show Event  edit page */
 router.get("/:id/edit", (req, res, next) => {
   const { id } = req.params;
 
   Event.findById(id)
-    .then((eventToEdit) => res.render("event/eventedit", eventToEdit))
+    .then((eventToEdit) => {
+      res.render("event/eventedit", eventToEdit)
+    })
     .catch((error) =>
       console.log(`Error while getting a single event for edit: ${error}`)
     );
+});
+
+/* POST - event edit - handling the data from event edit form*/
+router.post("/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+
+  Event.findByIdAndUpdate(id, req.body)
+    .then((eventEdited) => res.redirect(`/event/${eventEdited.id}`))
+    .catch((error) =>
+      console.log(`Error while getting a single event for edit: ${error}`)
+    );
+});
+
+
+
+
+/* POST - event delete - handling the data for event deletion*/
+router.post("/:id/delete", (req, res, next) => {
+  const { id } = req.params;
+  Event.findByIdAndDelete(id)
+    .then(() => res.redirect("/event/list"))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

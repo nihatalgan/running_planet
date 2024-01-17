@@ -2,7 +2,7 @@
 <label for="">Organised by:</label>
 <h3>{{event.organiser.name}} {{event.organiser.surname}}</h3>
 <hr />
-<p>{{event.date}}</p>
+<p>{{showDate event.date}}</p>
 <p>{{event.location}}</p>
 <p>{{event.distance}}</p>
 <p>{{event.description}}</p>
@@ -17,9 +17,3 @@
     <button type="submit">Delete</button>
   </form>
 {{/if}}
-
-{{!-- <p>Written by: {{book.author}}</p>
-<p>Summary: {{book.description}}</p>
-<p>Rating: {{book.rating}}/10</p>
-<hr />
-<a href="/books">Back</a> --}}
