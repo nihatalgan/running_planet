@@ -16,9 +16,9 @@
 
   <body>
     <header>
-      <nav class="navbar bg-body-tertiary">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img
               src="/images/images.jpg"
               alt="Logo"
@@ -28,42 +28,67 @@
             />
             Running Planet
           </a>
-          <a class="navbar-brand" href="#">
-            Events
-          </a>
-        </div>
-        <div class="container-fluid">
+          {{! <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button> }}
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/"
+                >Home</a>
+              </li>
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/event/list"
+                >Events</a>
+              </li>
+              </ul>
+              <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+              {{#if hasLoggedIn}}
+              <li class="nav-item ">
+                <a class="nav-link" href="/user/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/logout">Logout</a>
+              </li>    
+              {{else}}               
+              <li class="nav-item ">
+                <a class="nav-link" href="/auth/login">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/signup">Signup</a>
+              </li>  
+              {{/if}}                 
+            </ul>
+         
+            {{!-- <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success"
+                type="submit"
+              >Search</button>
+            </form> --}}
+          </div>
         </div>
       </nav>
 
-      <nav>
-        <ul>
-          <li>
-            <a href="/">
-              {{! <img src="" alt="logo"> }}
-              Running Planet
-            </a>
-          </li>
-          <li>
-            <a href="/event/list">Events</a>
-          </li>
-          {{#if hasLoggedIn}}
-            <li>
-              <a href="/user/profile">Profile</a>
-            </li>
-            <li>
-              <a href="/auth/logout">Logout</a>
-            </li>
-          {{else}}
-            <li>
-              <a href="/auth/login">Login</a>
-            </li>
-            <li>
-              <a href="/auth/signup">Signup</a>
-            </li>
-          {{/if}}
-        </ul>
-      </nav>
     </header>
 
     {{{body}}}
