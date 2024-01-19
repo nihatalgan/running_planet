@@ -1,31 +1,30 @@
 <h1>Events</h1>
 
 <header>
-    {{#if hasLoggedIn}}
-      <a href="/event/create">
-        <button>
-          Create Event
-        </button>
-      </a> 
-    {{else}}
-      <p>Please signin to create an event.</p>
-    {{/if}}
+  {{#if hasLoggedIn}}
+    <a href="/event/create">
+      <button>
+        Create Event
+      </button>
+    </a>
+  {{else}}
+    <p>Please signin to create an event.</p>
+  {{/if}}
 </header>
 
 {{#each events}}
-  <div>
+  <div style="display:inline flex; flex-direction: column;width:33%;">
 
-    <img
-      src="{{imageUrl}}"
-      class="card-img-top"
-      height="200px"
-      alt="{{name}}"
-    />
-    <h3><a href="/event/{{_id}}">{{name}}</a></h3>
+    <a href="/event/{{_id}}" style="font-size: 2rem;">{{name}}
 
-    {{!-- <p>{{location}}</p>
-    <p>{{distance}}</p>
-    <p><a href={{website}}>{{website}}</a></p> --}}
+      <img
+        src="{{imageUrl}}"
+        height="350px"
+        width="350px"
+        style="object-fit: cover;"
+        ;
+        alt="{{name}}"
+      /></a>
 
   </div>
 {{/each}}

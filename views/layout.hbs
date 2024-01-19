@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 
-  <body>
+  <body style="padding: 0px;">
       
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <header  class="bg-body-tertiary d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border ps-4 pe-4" >
       
         
       <div class="col-md-3 mb-2 mb-md-0">
@@ -29,10 +29,11 @@
 
       <div class="col-md-3 text-end">
         {{#if hasLoggedIn}}
-        <button type="button" class="btn btn-outline-primary me-2" ><a href="/auth/profile" style="text-decoration:none">Profile</a></button>
+        <button type="button" class="btn btn-outline-primary me-2" ><a href="/user/profile" style="text-decoration:none">Profile</a></button>
         <button type="button" class="btn btn-primary"><a class="nav-link" href="/auth/logout">Logout</a></button>
         {{else}}     
         <button type="button" class="btn btn-outline-primary me-2" ><a href="/auth/login" style="text-decoration:none">Login</a></button>
+        
         <button type="button" class="btn btn-primary"><a class="nav-link" href="/auth/signup">Signup</a></button>
         {{/if}}     
       </div>
@@ -42,9 +43,10 @@
 {{!-- ********************************************************************************** --}}
    
 
-    
+    <div style="margin: 50px;">
 
     {{{body}}}
+    </div>
 
     <script src="/js/script.js"></script>
     <script

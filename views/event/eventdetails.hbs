@@ -7,7 +7,7 @@
 <p>{{event.distance}}</p>
 <p>{{event.description}}</p>
 <p><a href={{event.website}}>{{event.website}}</a></p>
-<img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
+<img src="{{event.imageUrl}}" height="300px" card-img-top" alt="{{name}}" />
 
 {{#if isOrganiser}}
   <a href="/event/{{event.id}}/edit">
@@ -16,4 +16,6 @@
   <form action="/event/{{event.id}}/delete" method="post">
     <button type="submit">Delete</button>
   </form>
+
+ 
 {{/if}}
