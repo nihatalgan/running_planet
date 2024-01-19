@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const isEventOrganiser = require("../middleware/isEventOrganiser");
+
+
 // Require the Event model in order to interact with the database
 const Event = require("../models/Event.model");
 // ********* require fileUploader in order to use it *********
@@ -15,6 +18,7 @@ router.get("/create", isLoggedIn, (req, res, next) => {
 /* POST - event create - handling the data from event create form*/
 router.post(
   "/create",
+  isLoggedIn,
   fileUploader.single("event-cover-image"),
   (req, res, next) => {
     const { name, date, location, distance, description, website } = req.body;
@@ -76,7 +80,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 /* GET - show Event  edit page */
-router.get("/:id/edit", isLoggedIn, (req, res, next) => {
+router.get("/:id/edit", isLoggedIn, isEventOrganiser, (req, res, next) => {
   const { id } = req.params;
 
   Event.findById(id)
@@ -91,6 +95,8 @@ router.get("/:id/edit", isLoggedIn, (req, res, next) => {
 /* POST - event edit - handling the data from event edit form*/
 router.post(
   "/:id/edit",
+  isLoggedIn, 
+  isEventOrganiser,
   fileUploader.single("event-cover-image"),
   (req, res, next) => {
     const { id } = req.params;
@@ -124,7 +130,7 @@ router.post(
 );
 
 /* POST - event delete - handling the data for event deletion*/
-router.post("/:id/delete", (req, res, next) => {
+router.post("/:id/delete", isLoggedIn, isEventOrganiser, (req, res, next) => {
   const { id } = req.params;
   Event.findByIdAndDelete(id)
     .then(() => res.redirect("/event/list"))
