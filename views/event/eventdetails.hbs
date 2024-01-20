@@ -1,19 +1,49 @@
-<h1>{{event.name}}</h1>
-<label for="">Organised by:</label>
-<h3>{{event.organiser.name}} {{event.organiser.surname}}</h3>
-<hr />
-<p>{{showDate event.date}}</p>
-<p>{{event.location}}</p>
-<p>{{event.distance}}</p>
-<p>{{event.description}}</p>
-<p><a href={{event.website}}>{{event.website}}</a></p>
-<img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
 
-{{#if isOrganiser}}
-  <a href="/event/{{event.id}}/edit">
-    <button type="button">Edit</button>
-  </a>
-  <form action="/event/{{event.id}}/delete" method="post">
-    <button type="submit">Delete</button>
-  </form>
-{{/if}}
+    <h1>{{event.name}}</h1>
+    <label for="">Organised by:</label>
+    <h3>{{event.organiser.name}} {{event.organiser.surname}}</h3>
+    <hr />
+    <p>{{showDate event.date}}</p>
+    <p>{{event.location}}</p>
+    <p>{{event.distance}}</p>
+    <p>{{event.description}}</p>
+    <p><a href={{event.website}}>{{event.website}}</a></p>
+    <img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
+
+    {{#if isOrganiser}}
+      <a href="/event/{{event.id}}/edit">
+        <button type="button">Edit</button>
+      </a>
+
+      <form action="/event/{{event.id}}/delete" method="post">
+        <button type="submit">Delete</button>
+      </form>
+
+      <form action="/event/{{event.id}}/comment" method="post">
+        <label>
+          Comment:
+          <textarea name="comment" cols="30" rows="4"> </textarea>
+        </label>
+        <label>
+          Rating:
+          <select name="rating">
+            <option value="">select rating</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+        </label>
+        <button type="submit">submit</button>
+      </form>
+    {{/if}}
+  </body>
+</html>
