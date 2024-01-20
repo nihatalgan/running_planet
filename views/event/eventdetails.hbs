@@ -17,6 +17,11 @@
     <p><a href={{event.website}}>{{event.website}}</a></p>
     <img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
 
+    {{#each event.review}}
+      {{comment}}
+      {{rating}}
+    {{/each}}
+
     {{#if isOrganiser}}
       <a href="/event/{{event.id}}/edit">
         <button type="button">Edit</button>

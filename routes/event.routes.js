@@ -58,7 +58,15 @@ router.get("/:id", (req, res, next) => {
   const { id } = req.params;
   Event.findById(id)
     .populate("organiser")
+    .populate("review")
+    // .populate({
+    //   path: "review",
+    //   populate: {
+    //     path: "author",
+    //   },
+    // })
     .then((event) => {
+      // console.log(event.review[0].comment);
       let isOrganiser = false;
       // error occured = Cannot read properties of undefined (reading '_id'):
       // when guest user access this page
