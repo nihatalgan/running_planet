@@ -149,23 +149,16 @@ router.post("/:id/comment", isLoggedIn, (req, res, next) => {
     rating,
     comment,
   })
-    .then((newComment) => {
-      console.log(newComment);
-      res.redirect(`/event/${event}`);
+    .then((newReview) => {
+      Event.findByIdAndUpdate(event, {
+        $push: { review: newReview._id },
+      }).then(() => {
+        res.redirect(`/event/${event}`);
+      });
     })
     .catch((error) =>
       console.log(`Error while creating a new event: ${error}`)
     );
-
-  // Event.findByIdAndUpdate(
-  //   event,
-  //   { name, date, location, distance, description, website, imageUrl },
-  //   { new: true }
-  // )
-  //   .then((eventEdited) => res.redirect(`/event/${eventEdited.id}`))
-  //   .catch((error) =>
-  //     console.log(`Error while getting a single event for edit: ${error}`)
-  //   );
 });
 
 module.exports = router;
