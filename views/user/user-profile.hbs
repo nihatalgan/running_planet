@@ -1,5 +1,5 @@
 <h1>
-    My Profile
+  My Profile
 </h1>
 <hr />
 <p>Full name:</p>
@@ -14,3 +14,28 @@
 <hr />
 
 <a href="/user/profile/edit"><button>Edit Profile</button></a>
+
+<h2>My favourites:</h2>
+
+{{#each userDetails.favourite}}
+  <div>
+
+    <img
+      src="{{imageUrl}}"
+      class="card-img-top"
+      height="200px"
+      alt="{{name}}"
+    />
+    <h3><a href="/event/{{_id}}">{{name}}</a></h3>
+
+    <form action="/user/profile/no-fav-event" method="post">
+      <input type="text" name="event" hidden value="{{_id}}" />
+      <button type="submit">Remove from favourites</button>
+    </form>
+
+    {{!-- <p>{{location}}</p>
+    <p>{{distance}}</p>
+    <p><a href={{website}}>{{website}}</a></p> --}}
+
+  </div>
+{{/each}}

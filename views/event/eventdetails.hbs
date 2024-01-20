@@ -49,6 +49,11 @@
         </label>
         <button type="submit">submit</button>
       </form>
+
     {{/if}}
+    <form action="/user/profile/fav-event" method="post">
+      <input type="text" name="event" hidden value="{{event.id}}" />
+      <button type="submit">Add to favourites</button>
+    </form>
   </body>
 </html>

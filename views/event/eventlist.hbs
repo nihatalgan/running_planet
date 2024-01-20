@@ -1,15 +1,15 @@
 <h1>Events</h1>
 
 <header>
-    {{#if hasLoggedIn}}
-      <a href="/event/create">
-        <button>
-          Create Event
-        </button>
-      </a> 
-    {{else}}
-      <p>Please signin to create an event.</p>
-    {{/if}}
+  {{#if hasLoggedIn}}
+    <a href="/event/create">
+      <button>
+        Create Event
+      </button>
+    </a>
+  {{else}}
+    <p>Please signin to create an event.</p>
+  {{/if}}
 </header>
 
 {{#each events}}
