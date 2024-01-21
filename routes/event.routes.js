@@ -58,13 +58,13 @@ router.get("/:id", (req, res, next) => {
   const { id } = req.params;
   Event.findById(id)
     .populate("organiser")
-    .populate("review")
-    // .populate({
-    //   path: "review",
-    //   populate: {
-    //     path: "author",
-    //   },
-    // })
+    // .populate("review")
+    .populate({
+      path: "review",
+      populate: {
+        path: "author",
+      },
+    })
     .then((event) => {
       // console.log(event.review[0].comment);
       let isOrganiser = false;
@@ -80,6 +80,7 @@ router.get("/:id", (req, res, next) => {
           isOrganiser = true;
         }
       }
+
       res.render("event/eventdetails", { event, isOrganiser });
     })
     .catch((error) =>

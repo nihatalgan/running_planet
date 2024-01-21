@@ -20,6 +20,8 @@
     {{#each event.review}}
       {{comment}}
       {{rating}}
+      <p> {{author.name}} {{author.surname}} </p>
+      {{showDate date}}
     {{/each}}
 
     {{#if isOrganiser}}
@@ -30,6 +32,8 @@
       <form action="/event/{{event.id}}/delete" method="post">
         <button type="submit">Delete</button>
       </form>
+    {{/if}}
+    {{#if hasLoggedIn}}
 
       <form action="/event/{{event.id}}/comment" method="post">
         <label>
@@ -50,10 +54,10 @@
         <button type="submit">submit</button>
       </form>
 
+      <form action="/user/profile/fav-event" method="post">
+        <input type="text" name="event" hidden value="{{event.id}}" />
+        <button type="submit">Add to favorites</button>
+      </form>
     {{/if}}
-    <form action="/user/profile/fav-event" method="post">
-      <input type="text" name="event" hidden value="{{event.id}}" />
-      <button type="submit">Add to favorites</button>
-    </form>
   </body>
 </html>

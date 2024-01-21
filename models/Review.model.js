@@ -11,6 +11,7 @@ const reviewSchema = new Schema(
       // required: true,
     },
     comment: { type: String, required: true },
+    date: { type: Date, default: Date.now },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
