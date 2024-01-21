@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { distances } = require("../utils/enums");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const eventSchema = new Schema(
@@ -12,7 +13,7 @@ const eventSchema = new Schema(
 
     distance: {
       type: String,
-      enum: ["5k", "10k", "half-marathon", "marathon"],
+      enum: distances.map(obj => obj.value),
     },
     description: {
       type: String,

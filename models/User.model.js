@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { genders } = require("../utils/enums");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
@@ -29,7 +30,7 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum: genders.map(obj => obj.value),
     },
     password: {
       type: String,

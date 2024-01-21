@@ -29,12 +29,11 @@
 
       <div class="col-md-3 text-end">
         {{#if hasLoggedIn}}
-        <button type="button" class="btn btn-outline-primary me-2" ><a href="/user/profile" style="text-decoration:none">Profile</a></button>
-        <button type="button" class="btn btn-primary"><a class="nav-link" href="/auth/logout">Logout</a></button>
+          <a href="/user/profile" class="btn btn-primary mr-2">Profile</a>
+          <a href="/auth/logout" class="btn btn-outline-primary mr-2">Logout</a>
         {{else}}     
-        <button type="button" class="btn btn-outline-primary me-2" ><a href="/auth/login" style="text-decoration:none">Login</a></button>
-        
-        <button type="button" class="btn btn-primary"><a class="nav-link" href="/auth/signup">Signup</a></button>
+          <a href="/auth/login" class="btn btn-outline-primary mr-2">Login</a>
+          <a href="/auth/signup" class="btn btn-primary">Signup</a>
         {{/if}}     
       </div>
       
@@ -43,7 +42,7 @@
 {{!-- ********************************************************************************** --}}
    
 
-    <div style="margin: 50px;">
+    <div style="padding: 24px;">
 
     {{{body}}}
     </div>

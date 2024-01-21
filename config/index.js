@@ -25,6 +25,8 @@ const session = require("express-session");
 // https://www.npmjs.com/package/connect-mongo
 const MongoStore = require("connect-mongo");
 
+const { genders, distances } = require("../utils/enums");
+
 // Connects the mongo uri to maintain the same naming structure
 const MONGO_URI =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/running_planet";
@@ -64,6 +66,8 @@ module.exports = (app) => {
   );
   app.use(function (req, res, next) {
     app.locals.hasLoggedIn = Boolean(req.session && req.session.currentUser);
+    app.locals.genders = genders;
+    app.locals.distances = distances;
     next();
   });
 };
