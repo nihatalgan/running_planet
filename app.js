@@ -14,15 +14,15 @@ const express = require("express");
 const hbs = require("hbs");
 
 // https://handlebarsjs.com/guide/#custom-helpers
-hbs.registerHelper('showDate', (date) => {
-    // if date is unavailable, project wont run
-    if (date) {
-        return date.toLocaleDateString('en-UK');
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
-    } else {
-        return '';
-    }
-})
+hbs.registerHelper("showDate", (date) => {
+  // if date is unavailable, project wont run
+  if (date) {
+    return date.toLocaleDateString("en-UK");
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+  } else {
+    return "";
+  }
+});
 
 const app = express();
 

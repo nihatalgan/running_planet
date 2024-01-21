@@ -15,9 +15,9 @@
 
 <a href="/user/profile/edit"><button>Edit Profile</button></a>
 
-<h2>My favourites:</h2>
+<h2>My favorites:</h2>
 
-{{#each userDetails.favourite}}
+{{#each userDetails.favorite}}
   <div>
 
     <img
@@ -30,7 +30,7 @@
 
     <form action="/user/profile/no-fav-event" method="post">
       <input type="text" name="event" hidden value="{{_id}}" />
-      <button type="submit">Remove from favourites</button>
+      <button type="submit">Remove from favorites</button>
     </form>
 
     {{!-- <p>{{location}}</p>

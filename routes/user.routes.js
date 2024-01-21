@@ -8,7 +8,7 @@ const User = require("../models/User.model");
 router.get("/profile", isLoggedIn, (req, res, next) => {
   const id = req.session.currentUser._id;
   User.findById(id)
-    .populate("favourite")
+    .populate("favorite")
     .then((profileToEdit) => {
       res.render("user/user-profile", { userDetails: profileToEdit });
     })
@@ -34,22 +34,22 @@ router.post("/profile/edit", isLoggedIn, (req, res, next) => {
     .catch((error) => next(error));
 });
 
-/* POST user adds the events to favourites */
+/* POST user adds the events to favorites */
 router.post("/profile/fav-event", isLoggedIn, (req, res) => {
   const userId = req.session.currentUser._id;
   const eventId = req.body.event;
   User.findByIdAndUpdate(
     userId,
     {
-      $addToSet: { favourite: eventId },
+      $addToSet: { favorite: eventId },
     },
     { new: true }
   )
     .then(() => {
-      res.redirect(`/user/profile`);
+      res.redirect("/event/list");
     })
     .catch((error) =>
-      console.log(`Error while creating a new favourite: ${error}`)
+      console.log(`Error while creating a new favorite: ${error}`)
     );
 });
 
@@ -60,7 +60,7 @@ router.post("/profile/no-fav-event", isLoggedIn, (req, res) => {
   User.findByIdAndUpdate(
     userId,
     {
-      $pull: { favourite: eventId },
+      $pull: { favorite: eventId },
     },
     { new: true }
   )
@@ -68,7 +68,7 @@ router.post("/profile/no-fav-event", isLoggedIn, (req, res) => {
       res.redirect(`/user/profile`);
     })
     .catch((error) =>
-      console.log(`Error while creating a new favourite: ${error}`)
+      console.log(`Error while creating a new favorite: ${error}`)
     );
 });
 
