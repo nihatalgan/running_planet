@@ -16,12 +16,18 @@
     <p>{{event.description}}</p>
     <p><a href={{event.website}}>{{event.website}}</a></p>
     <img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
+    {{#if score}}
+      <p>Event average Rating: {{score}}</p>
+    {{/if}}
 
+    <h3>Reviews:</h3>
     {{#each event.review}}
-      {{comment}}
-      {{rating}}
-      <p> {{author.name}} {{author.surname}} </p>
-      {{showDate date}}
+      <p>Comment: {{comment}}</p>
+      <p>Rating: {{rating}}</p>
+      <p>Written by: {{author.name}} {{author.surname}} </p>
+      <p>Written on: {{showDate date}}</p>
+      <hr />
+
     {{/each}}
 
     {{#if isOrganiser}}

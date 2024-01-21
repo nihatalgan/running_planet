@@ -81,7 +81,13 @@ router.get("/:id", (req, res, next) => {
         }
       }
 
-      res.render("event/eventdetails", { event, isOrganiser });
+      let score = 0;
+      for (let i = 0; i < event.review.length; i++) {
+        score += event.review[i].rating;
+      }
+      score = Math.round((score / event.review.length) * 10) / 10;
+
+      res.render("event/eventdetails", { event, isOrganiser, score });
     })
     .catch((error) =>
       console.log(`Error while getting a single event ${error}`)
