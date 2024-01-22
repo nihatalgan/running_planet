@@ -21,9 +21,16 @@
       height="200px"
       alt="{{name}}"
     />
-    <form action="/user/profile/fav-event" method="post">
-      <input type="text" name="event" hidden value="{{_id}}" />
-      <button type="submit">Add to favorites</button>
-    </form>
+    {{#if hasLoggedIn}}
+      <form action="/user/profile/fav-event" method="post">
+        <input type="text" name="event" hidden value="{{_id}}" />
+        <button type="submit">Add to favorites</button>
+      </form>
+    {{/if}}
+
+    {{!-- <p>{{location}}</p>
+    <p>{{distance}}</p>
+    <p><a href={{website}}>{{website}}</a></p> --}}
+
   </div>
 {{/each}}
