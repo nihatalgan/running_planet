@@ -1,21 +1,23 @@
-<div id="form">
-  <h2>Edit Profile</h2>
-  <form action="/user/profile/edit" method="POST">
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" value="{{userToEdit.name}}" />
+<div class="d-flex justify-content-center align-items-center w-100">
+
+<div id="form" class="card w-50">
+  <h2  class="card-header text-center">Edit Profile</h2>
+  <form action="/user/profile/edit" method="POST" class="card-body row row-gap-3 w-100">
+    <div class="col-6">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" class="form-control" name="name" value="{{userToEdit.name}}" />
     </div> 
-    <div>
-      <label for="surname">Surname</label>
-      <input type="text" id="surname" name="surname" placeholder="Your surname" value="{{userToEdit.surname}}"/>
+    <div class="col-6">
+      <label for="surname" class="form-label">Surname</label>
+      <input type="text" id="surname"  class="form-control" name="surname" placeholder="Your surname" value="{{userToEdit.surname}}"/>
     </div>
-    <div>
-      <label for="brithdate">Birthdate</label>
-      <input type="date" id="brithdate" name="birthdate" value="{{getDateInputValue userToEdit.birthdate}}" />
+    <div class="col-6">
+      <label for="brithdate"class="form-label">Birthdate</label>
+      <input type="date" id="brithdate" class="form-select form-select-sm" name="birthdate" value="{{getDateInputValue userToEdit.birthdate}}" />
     </div>  
-    <div>
-      <label for="gender">Gender</label>
-      <select name="gender" id="gender">
+    <div class="col-6">
+      <label for="gender" class="form-label">Gender</label>
+      <select class="form-select form-select-sm" name="gender" id="gender">
         <option>Please select your gender</option>
           {{#each genders}}
         <option value="{{this.value}}" {{markSelected ../userToEdit.gender this.value}}>
@@ -24,8 +26,8 @@
          {{/each}}
       </select>
     </div>
-    <div>
-      <button type="submit">Save Changes</button>
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

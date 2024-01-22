@@ -1,41 +1,46 @@
-<h1>
-  My Profile
-</h1>
-<hr />
-<p>Full name:</p>
-<h3>{{userDetails.name}} {{userDetails.surname}}</h3>
+<section class="card w-50 mb-4">
+  <h1 class="card-header">
+    My Profile
+  </h1>
+  <div class="card-body">
+    <p class="card-text my-0">Full name:</p>
+    <h3 class="card-title">{{userDetails.name}} {{userDetails.surname}}</h3>
 
-<p>Date of Birth:</p>
-<h3>{{showDate userDetails.birthdate}}</h3>
+    <p class="card-text my-0">Date of Birth:</p>
+    <h3 class="card-title">{{showDate userDetails.birthdate}}</h3>
 
-<p>Gender:</p>
-<h3>{{userDetails.gender}}</h3>
-
-<hr />
-
-<a href="/user/profile/edit"><button>Edit Profile</button></a>
-
-<h2>My favorites:</h2>
-
-{{#each userDetails.favorite}}
-  <div>
-
-    <img
-      src="{{imageUrl}}"
-      class="card-img-top"
-      height="200px"
-      alt="{{name}}"
-    />
-    <h3><a href="/event/{{_id}}">{{name}}</a></h3>
-
-    <form action="/user/profile/no-fav-event" method="post">
-      <input type="text" name="event" hidden value="{{_id}}" />
-      <button type="submit">Remove from favorites</button>
-    </form>
-
-    {{!-- <p>{{location}}</p>
-    <p>{{distance}}</p>
-    <p><a href={{website}}>{{website}}</a></p> --}}
-
+    <p class="card-text my-0">Gender:</p>
+    <h3 class="card-title">{{userDetails.gender}}</h3>
+    <a  class="btn btn-outline-primary text-decoration-none btn-sm px-4"href="/user/profile/edit">Edit Profile</a>
   </div>
-{{/each}}
+</section>
+
+<h3>My favorites:</h3>
+
+<section class="container mx-0 px-0">
+  <article class="row row-cols-4">
+    {{#each userDetails.favorite}}
+      <a href="/event/{{_id}}" class="col text-decoration-none">
+        <article class="card">
+          <img
+            src="{{imageUrl}}"
+            class="card-img-top"
+            height="200px"
+            alt="{{name}}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="card-text"><i class="bi bi-geo-alt-fill me-2"></i>{{location}}</p>
+            <p class="card-text"><i class="bi bi-calendar-date-fill me-2"></i>{{showDate date}}</p>
+            <div class="d-flex justify-content-center center mt-3">
+              <form action="/user/profile/no-fav-event" method="post" class="mb-0">
+                <input type="text" name="event" hidden value="{{_id}}" />
+                <button class="btn btn-outline-danger btn-sm" type="submit"><i class="bi bi-trash-fill me-2"></i>Remove from favorites</button>
+              </form>
+            </div>
+          </div>
+        </article>
+      </a>
+    {{/each}}
+  </article>
+</section>

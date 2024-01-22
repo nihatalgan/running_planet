@@ -66,7 +66,6 @@ router.get("/:id", (req, res, next) => {
       },
     })
     .then((event) => {
-      // console.log(event.review[0].comment);
       let isOrganiser = false;
       // error occured = Cannot read properties of undefined (reading '_id'):
       // when guest user access this page

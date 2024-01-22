@@ -1,36 +1,43 @@
-<h1>Events</h1>
-
-<header>
+<header class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h2 text-body-secondary">Events</h1>
   {{#if hasLoggedIn}}
     <a href="/event/create">
-      <button>
+      <button class="btn btn-primary btn-sm">
         Create Event
       </button>
     </a>
   {{else}}
-    <p>Please signin to create an event.</p>
+    <p class="text-body-secondary lead">Please signin to create an event.</p>
   {{/if}}
 </header>
 
-{{#each events}}
-  <div style="display:inline flex; flex-direction: column;width:33%;">
-    <h3><a href="/event/{{_id}}">{{name}}</a></h3>
-    <img
-      src="{{imageUrl}}"
-      class="card-img-top"
-      height="200px"
-      alt="{{name}}"
-    />
-    {{#if hasLoggedIn}}
-      <form action="/user/profile/fav-event" method="post">
-        <input type="text" name="event" hidden value="{{_id}}" />
-        <button type="submit">Add to favorites</button>
-      </form>
-    {{/if}}
+<section class="container mx-0 px-0">
+  <article class="row row-cols-4">
+  {{#each events}}
+    <a href="/event/{{_id}}" class="col text-decoration-none">
+      <article class="card">
+        <img
+          src="{{imageUrl}}"
+          class="card-img-top"
+          height="200px"
+          alt="{{name}}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{name}}</h5>
+          <p class="card-text"><i class="bi bi-geo-alt-fill me-2"></i>{{location}}</p>
+          <p class="card-text"><i class="bi bi-calendar-date-fill me-2"></i>{{showDate date}}</p>
+          {{#if ../hasLoggedIn}}
+            <div class="d-flex justify-content-center center mt-3">
+              <form action="/user/profile/fav-event" method="post" class="mb-0">
+                <input type="text" name="event" hidden value="{{_id}}" />
+                <button class="btn btn-outline-danger btn-sm" type="submit"><i class="bi bi-heart-fill me-2"></i>Add to favorites</button>
+              </form>
+            </div>
+        </div>
+        {{/if}}
+      </article>
+    </a>
+  {{/each}}
 
-    {{!-- <p>{{location}}</p>
-    <p>{{distance}}</p>
-    <p><a href={{website}}>{{website}}</a></p> --}}
-
-  </div>
-{{/each}}
+  </article>
+</section>
