@@ -15,14 +15,23 @@
 {{#each events}}
   <div style="display:inline flex; flex-direction: column;width:33%;">
 
-    <a href="/event/{{_id}}" style="font-size: 2rem;">{{name}}
+    <h3><a href="/event/{{_id}}">{{name}}</a></h3>
+    <img
+      src="{{imageUrl}}"
+      class="card-img-top"
+      height="200px"
+      alt="{{name}}"
+    />
+    <form action="/user/profile/fav-event" method="post">
+      <input type="text" name="event" hidden value="{{_id}}" />
+      <button type="submit">Add to favorites</button>
+    </form>
 
       <img
         src="{{imageUrl}}"
         height="350px"
         width="350px"
         style="object-fit: cover;"
-        ;
         alt="{{name}}"
       /></a>
 

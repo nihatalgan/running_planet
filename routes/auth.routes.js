@@ -66,10 +66,10 @@ router.post("/signup", isLoggedOut, (req, res) => {
         email,
         birthdate,
         gender,
-        
-        // because sign-up is failing when we create 2 or more user. 
+
+        // because sign-up is failing when we create 2 or more user.
         //adding username field fixes the issue
-        username: email, 
+        // username: email,
 
         password: hashedPassword,
       });

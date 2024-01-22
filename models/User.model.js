@@ -18,13 +18,7 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-    },
+
     birthdate: {
       type: Date,
     },
@@ -36,6 +30,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    favorite: [{ type: Schema.Types.ObjectId, ref: "Event" }],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

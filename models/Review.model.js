@@ -5,12 +5,13 @@ const reviewSchema = new Schema(
     author: { type: Schema.Types.ObjectId, ref: "User", required: true },
     event: { type: Schema.Types.ObjectId, ref: "Event", required: true },
     rating: {
-        type: Number,
-        min:1,
-        max: 5,
-        required: true,
+      type: Number,
+      min: 1,
+      max: 5,
+      // required: true,
     },
     comment: { type: String, required: true },
+    date: { type: Date, default: Date.now },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

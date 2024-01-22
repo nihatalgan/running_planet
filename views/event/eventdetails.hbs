@@ -7,15 +7,53 @@
 <p>{{event.distance}}</p>
 <p>{{event.description}}</p>
 <p><a href={{event.website}}>{{event.website}}</a></p>
-<img src="{{event.imageUrl}}" height="300px" card-img-top" alt="{{name}}" />
+<img src="{{event.imageUrl}}" class="card-img-top" alt="{{name}}" />
+{{#if score}}
+  <p>Event average Rating: {{score}}</p>
+{{/if}}
+
+<h3>Reviews:</h3>
+{{#each event.review}}
+  <p>Comment: {{comment}}</p>
+  <p>Rating: {{rating}}</p>
+  <p>Written by: {{author.name}} {{author.surname}} </p>
+  <p>Written on: {{showDate date}}</p>
+  <hr />
+
+{{/each}}
 
 {{#if isOrganiser}}
   <a href="/event/{{event.id}}/edit">
     <button type="button">Edit</button>
   </a>
+
   <form action="/event/{{event.id}}/delete" method="post">
     <button type="submit">Delete</button>
   </form>
+{{/if}}
+{{#if hasLoggedIn}}
 
- 
+  <form action="/event/{{event.id}}/comment" method="post">
+    <label>
+      Comment:
+      <textarea name="comment" cols="30" rows="4"> </textarea>
+    </label>
+    <label>
+      Rating:
+      <select name="rating">
+        <option value="">select rating</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select>
+    </label>
+    <button type="submit">submit</button>
+  </form>
+
+  <form action="/user/profile/fav-event" method="post">
+    <input type="text" name="event" hidden value="{{event.id}}" />
+    <button type="submit">Add to favorites</button>
+  </form>
 {{/if}}

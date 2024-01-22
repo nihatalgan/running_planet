@@ -29,6 +29,7 @@ const eventSchema = new Schema(
       //   "https://www.utrechtmarathon.com/media/11979/lddk-20230521-0083.jpg?anchor=center&mode=crop&width=550&height=400&rnd=133470474780000000",
     },
     organiser: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    review: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
