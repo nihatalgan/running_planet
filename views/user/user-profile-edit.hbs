@@ -1,32 +1,34 @@
-<div id="form">
-  <h2>Edit Profile</h2>
-  <form action="/user/profile/edit" method="POST">
+<div class="d-flex justify-content-center align-items-center w-100">
 
-    <label>
-      Name:
-      <input type="text" name="name" value="{{userToEdit.name}}" />
-    </label>
-
-    <label>
-      Surname
-      <input type="text" name="surname" placeholder="Your surname" value="{{userToEdit.surname}}"/>
-    </label>
-
-    <label>
-      Birthdate
-      <input type="date" name="birthdate" value="{{userToEdit.birthdate}}" />
-    </label>
-
-
-    <label>
-      Gender
-      <select name="gender" value=" " placeholder="Gender">
-        <option value="">select gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
+<div id="form" class="card w-50">
+  <h2  class="card-header text-center">Edit Profile</h2>
+  <form action="/user/profile/edit" method="POST" class="card-body row row-gap-3 w-100">
+    <div class="col-6">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" class="form-control" name="name" value="{{userToEdit.name}}" />
+    </div> 
+    <div class="col-6">
+      <label for="surname" class="form-label">Surname</label>
+      <input type="text" id="surname"  class="form-control" name="surname" placeholder="Your surname" value="{{userToEdit.surname}}"/>
+    </div>
+    <div class="col-6">
+      <label for="brithdate"class="form-label">Birthdate</label>
+      <input type="date" id="brithdate" class="form-select form-select-sm" name="birthdate" value="{{getDateInputValue userToEdit.birthdate}}" />
+    </div>  
+    <div class="col-6">
+      <label for="gender" class="form-label">Gender</label>
+      <select class="form-select form-select-sm" name="gender" id="gender">
+        <option>Please select your gender</option>
+          {{#each genders}}
+        <option value="{{this.value}}" {{markSelected ../userToEdit.gender this.value}}>
+              {{this.label}}
+         </option>
+         {{/each}}
       </select>
-    </label>
-    <button type="submit">Save Changes</button>
+    </div>
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}

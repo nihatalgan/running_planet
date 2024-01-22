@@ -1,55 +1,61 @@
-<div id="form">
-  <h2>Edit "{{name}}" event</h2>
-  <form action="/event/{{id}}/edit" method="POST" enctype="multipart/form-data">
+<div class="d-flex justify-content-center align-items-center w-100">
+  <div id="form" class="card w-75">
+    <h2 class="card-header text-center">Edit <span class="badge bg-info-subtle text-black fs-2">{{name}}</span> event </h2>
+    <form action="/event/{{id}}/edit" method="POST" enctype="multipart/form-data" class="card-body row row-gap-3 w-100">
+      <div class="col-6 border-end">
+        <div  class="col-12">
+          <label for="text" class="form-label">Name</label>
+          <input type="text" id="text" class="form-control" name="name" value="{{name}}" />
+        </div>
+        <div class="row my-3">
+          <div class="col-6">
+              <label for="distance" class="form-label">Distance</label>
+              <select name="distance" id="distance" class="form-select form-select-sm" aria-label="Select The Distance">
+                <option value="">Select distance</option>
+                {{#each distances}}
+                <option value="{{this.value}}" {{markSelected ../distance this.value}}>
+                    {{this.label}}
+                </option>
+              {{/each}}
+              </select>
+          </div>
 
-    <label>
-      Name:
-      <input type="text" name="name" value="{{name}}" />
-    </label>
+          <div class="col-6">
+            <label for="date" class="form-label">Date</label>
+            <input type="date"  id="date" value="{{getDateInputValue date}}" name="date" class="form-control form-select-sm" />
+          </div>
+        </div>
+        <div class="col-12 my-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" id="location" class="form-control " name="location" value="{{location}}" />
+          </div>
+          <div class="col-12 my-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" name="event-cover-image"class="form-control" />
+            <input type="text" name="existingImage" hidden value="{{imageUrl}}" />
+        </div>
+     </div>
+     <div class="col-6">
+        <div class="col-12">
+          <label for="website" class="form-label">Website</label>
+          <input type="text" id="website" class="form-control" name="website" value="{{website}}" />
+        </div>
+        <div class="col-12 my-3">
+          <label for="description"  class="form-label">Description</label>
+          <textarea name="description"  class="form-control"  id="description" cols="30" rows="4">{{description}}</textarea>
+        </div>
+     </div>
+      <div class="col-6 d-flex justify-content-center mt-1">
+        <a href="/event/{{id}}" class="btn btn-outline-primary w-50">Go Back</a>
+      </div>
+     <div class="col-6 d-flex justify-content-center mt-1">
+       <button type="submit" class="btn btn-primary w-50">Save Changes</button>
+     </div>
 
-    <label>
-      Date:
-      <input type="date" value="{{date}}" name="date" />
-    </label>
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+      {{/if}}
 
-    <label>
-      Location:
-      <input type="text" name="location" value="{{location}}" />
-    </label>
-
-    <label>
-      Distance:
-      <select name="distance">
-        <option value="">select distance</option>
-        <option value="5k">5k</option>
-        <option value="10k">10k</option>
-        <option value="half-marathon">Half Marathon</option>
-        <option value="marathon">Marathon</option>
-      </select>
-    </label>
-
-    <label>
-      Description:
-      <textarea name="description" cols="30" rows="4">{{description}}
-      </textarea>
-    </label>
-
-    <label>
-      Website:
-      <input type="text" name="website" value="{{website}}" />
-    </label>
-
-    <label>Image:
-      <input type="file" name="event-cover-image" />
-      <input type="text" name="existingImage" hidden value="{{imageUrl}}" />
-    </label>
-
-    <button type="submit">Save Changes</button>
-    <a href="/event/{{id}}">Go Back</a>
-
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-
-  </form>
+    </form>
+  </div>
 </div>

@@ -24,6 +24,25 @@ hbs.registerHelper("showDate", (date) => {
   }
 });
 
+// https://stackoverflow.com/questions/48270865/render-with-handlebars-a-html-select-element-with-option-selected
+hbs.registerHelper('markSelected', (currentValue, optionValue) => {
+    return currentValue === optionValue ? 'selected' : ''; 
+})
+
+hbs.registerHelper('getDateInputValue', (date) => {
+    if (date) {
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+        const dateStr = date.toLocaleDateString('en-UK'); // '20/01/2024'
+        const dateArr = dateStr.split('/'); // ['20', '01', 2024']
+
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
+        return `${dateArr[2]}-${dateArr[1]}-${dateArr[0]}`; // '2024-01-20'
+    } else {
+        return '';
+    }
+})
+
+
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
