@@ -1,51 +1,90 @@
 <div class="d-flex justify-content-center align-items-center w-100">
-  <div id="form" class="card w-75">
+  <div id="form" class="card">
     <h2 class="card-header text-center">Create an event</h2>
-    <form action="/event/create" method="POST" enctype="multipart/form-data" class="card-body row row-gap-3 w-100">
+    <form
+      action="/event/create"
+      method="POST"
+      enctype="multipart/form-data"
+      class="card-body row row-gap-3 w-100"
+    >
       <div class="col-6 border-end">
-        <div  class="col-12">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="name"  class="form-control" name="name" placeholder="Event name" />
+        <div class="col-12">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            placeholder="Event name"
+          />
         </div>
         <div class="row my-3">
           <div class="col-6">
             <label for="distance" class="form-label">Distance</label>
-            <select name="distance" class="form-select form-select-sm" aria-label="Select The Distance">
+            <select
+              name="distance"
+              class="form-select form-select-sm"
+              aria-label="Select The Distance"
+            >
               <option value="">Select distance</option>
               {{#each distances}}
-                <option value="{{this.value}}" {{{markSelected "" this.value}}}>
-                    {{this.label}}
+                <option value="{{this.value}}" {{markSelected "" this.value}}>
+                  {{this.label}}
                 </option>
               {{/each}}
             </select>
           </div>
           <div class="col-6">
-              <label for="date" class="form-label">Date</label>
-              <input type="date" id="date" class="form-control form-select-sm" value="date" name="date" />
+            <label for="date" class="form-label">Date</label>
+            <input
+              type="date"
+              id="date"
+              class="form-control form-select-sm"
+              value="date"
+              name="date"
+            />
           </div>
         </div>
         <div class="col-12 my-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text"  id="location"  class="form-control" name="location" placeholder="Location" />
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            id="location"
+            class="form-control"
+            name="location"
+            placeholder="Location"
+          />
         </div>
-        
+
         <div class="col-12 my-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="file" id="image" name="event-cover-image" class="form-control form-control-file" />
+          <label for="image" class="form-label">Image</label>
+          <input
+            type="file"
+            id="image"
+            name="event-cover-image"
+            class="form-control form-control-file"
+          />
         </div>
       </div>
       <div class="col-6">
         <div class="col-12">
-            <label for="website" class="form-label"> Website</label>
-            <input type="text"id="website"  class="form-control" name="website" placeholder="Website" />
+          <label for="website" class="form-label"> Website</label>
+          <input
+            type="text"
+            id="website"
+            class="form-control"
+            name="website"
+            placeholder="Website"
+          />
         </div>
         <div class="col-12 my-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description"  class="form-control" cols="30" rows="4"> </textarea>
+          <label for="description" class="form-label">Description</label>
+          <textarea name="description" class="form-control" cols="30" rows="4">
+          </textarea>
         </div>
       </div>
       <div class="col-12 d-flex justify-content-center pt-3">
-          <button type="submit" class="btn btn-primary w-50">submit</button>
+        <button type="submit" class="btn btn-primary w-50">submit</button>
       </div>
       {{#if errorMessage}}
         <p class="error">{{errorMessage}}</p>
