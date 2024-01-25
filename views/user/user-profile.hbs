@@ -1,17 +1,24 @@
 <section class="card w-50 mb-4">
-  <h1 class="card-header">
+  <h3 class="card-header">
     My Profile
-  </h1>
+  </h3>
   <div class="card-body">
-    <p class="card-text my-0">Full name:</p>
-    <h3 class="card-title">{{userDetails.name}} {{userDetails.surname}}</h3>
+    <strong class="card-text my-0">Full name:</strong>
+    <p class="card-title">{{userDetails.name}} {{userDetails.surname}}</p>
 
-    <p class="card-text my-0">Date of Birth:</p>
-    <h3 class="card-title">{{showDate userDetails.birthdate}}</h3>
+    <strong class="card-text my-0">Date of Birth:</strong>
+    <p class="card-title">{{showDate userDetails.birthdate}}</p>
 
-    <p class="card-text my-0">Gender:</p>
-    <h3 class="card-title">{{userDetails.gender}}</h3>
-    <a  class="btn btn-outline-primary text-decoration-none btn-sm px-4"href="/user/profile/edit">Edit Profile</a>
+    <strong class="card-text my-0">Gender:</strong>
+    <p class="card-title">{{userDetails.gender}}</p>
+
+    <strong class="card-text my-0">E-mail:</strong>
+    <p class="card-title">{{userDetails.email}}</p>
+
+    <a
+      class="btn btn-outline-primary text-decoration-none btn-sm px-4"
+      href="/user/profile/edit"
+    >Edit Profile</a>
   </div>
 </section>
 
@@ -30,12 +37,22 @@
           />
           <div class="card-body">
             <h5 class="card-title">{{name}}</h5>
-            <p class="card-text"><i class="bi bi-geo-alt-fill me-2"></i>{{location}}</p>
-            <p class="card-text"><i class="bi bi-calendar-date-fill me-2"></i>{{showDate date}}</p>
+            <p class="card-text"><i
+                class="bi bi-geo-alt-fill me-2"
+              ></i>{{location}}</p>
+            <p class="card-text"><i
+                class="bi bi-calendar-date-fill me-2"
+              ></i>{{showDate date}}</p>
             <div class="d-flex justify-content-center center mt-3">
-              <form action="/user/profile/no-fav-event" method="post" class="mb-0">
+              <form
+                action="/user/profile/no-fav-event"
+                method="post"
+                class="mb-0"
+              >
                 <input type="text" name="event" hidden value="{{_id}}" />
-                <button class="btn btn-outline-danger btn-sm" type="submit"><i class="bi bi-trash-fill me-2"></i>Remove from favorites</button>
+                <button class="btn btn-outline-danger btn-sm" type="submit"><i
+                    class="bi bi-trash-fill me-2"
+                  ></i>Remove from favorites</button>
               </form>
             </div>
           </div>
