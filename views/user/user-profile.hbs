@@ -25,9 +25,13 @@
 <h3>My favorites:</h3>
 
 <section class="container mx-0 px-0">
-  <article class="row row-cols-4">
+  <article class="row row-cols">
     {{#each userDetails.favorite}}
-      <a href="/event/{{_id}}" class="col text-decoration-none">
+      <a
+        href="/event/{{_id}}"
+        style="max-width: 302px;"
+        class="col-sm-6 col-lg-4 col-xl-3 text-decoration-none mb-5"
+      >
         <article class="card">
           <img
             src="{{imageUrl}}"
