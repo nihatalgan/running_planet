@@ -1,111 +1,151 @@
 <section>
-  <h1 class="h2 mb-3">{{event.name}}</h1>
-  <div class="d-flex">
-    <div class="me-5 d-flex">
-      <i class="bi bi-geo-alt-fill"></i>
-      <p class="text-body-secondary ms-1" >
-        {{event.location}}
-      </p>
-    </div>
-    
-    <div class="me-5 d-flex">
-      <i class="bi bi-calendar-date-fill"></i>
-      <p class="text-body-secondary ms-1">
-        {{showDate event.date}}
-      </p>
-    </div>
-    
-    <div class="me-5 d-flex">
-      <i class="bi bi-flag-fill"></i>
-      <p class="text-body-secondary ms-1">
-        {{event.distance}}
-      </p>
-    </div>
-
-    
-    {{#if score}}
+  <div style="flex-direction: row; display:flex">
+    <div class="col-lg-6 p-2">
+      <h1 class="h2 mb-3">{{event.name}}</h1>
       <div class="d-flex">
-        <i class="bi bi-star-fill"></i>
-        <p class="text-body-secondary ms-1">Event avg. rating: {{score}}</span>
+        <div class="me-5 d-flex">
+          <i class="bi bi-geo-alt-fill"></i>
+          <p class="text-body-secondary ms-1" >
+            {{event.location}}
+          </p>
+        </div>
+        
+        <div class="me-5 d-flex">
+          <i class="bi bi-calendar-date-fill"></i>
+          <p class="text-body-secondary ms-1">
+            {{showDate event.date}}
+          </p>
+        </div>
+        
+        <div class="me-5 d-flex">
+          <i class="bi bi-flag-fill"></i>
+          <p class="text-body-secondary ms-1">
+            {{event.distance}}
+          </p>
+        </div>
+
+        
+        {{#if score}}
+          <div class="d-flex">
+            <i class="bi bi-star-fill"></i>
+            <p class="text-body-secondary ms-1">Event avg. rating: {{score}}</span>
+          </div>
+        {{/if}}
+
+        
+        
       </div>
-    {{/if}}
 
-    
-    
-  </div>
+      <img src="{{event.imageUrl}}" class="mb-3 img-fluid rounded  d-block " alt="{{name}}" />
+           
+       
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong class="me-">Description</strong>              
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+               {{event.description}}
+              </p>
+            </div>
+          </div>
+          
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong class="me-">Added by:</strong>              
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+               {{event.organiser.name}} {{event.organiser.surname}}
+              </p>
+            </div>
+          </div>
 
-  <img src="{{event.imageUrl}}" class="mb-3 img-fluid rounded w-50 d-block " alt="{{name}}" />
-  <h4>Description:</h4>
-  <p class="mt-3">{{event.description}}</p>
-  <h4>Added by:</h4>
-  <p class="mt-3">{{event.organiser.name}} {{event.organiser.surname}}</p>
-  <p class="mt-3">For more info: <a href={{event.website}}>{{event.website}}</a></p>
-  
-  {{#if hasLoggedIn}}
-    <form action="/user/profile/fav-event" method="post">
-      <input type="text" name="event" hidden value="{{event.id}}" />
-      <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-heart-fill me-2"></i>Add to favorites</button>
-    </form>
-  {{/if}}
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong class="me-">For more info:</strong>              
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+               <a href={{event.website}}>{{event.website}}</a>
+              </p>
+            </div>
+          </div>
 
-  {{#if isOrganiser}}
-    <div class="d-flex align-items-center border w-25 p-3">
-      <p class="me-3 my-0">For organiser:</p>
-      <a class="btn btn-outline-primary text-decoration-none btn-sm me-3 px-3" href="/event/{{event.id}}/edit">
-        Edit
-      </a>
-
-      <form action="/event/{{event.id}}/delete" method="post" class="my-0">
-        <button class="btn btn-danger text-decoration-none btn-sm" type="submit">Delete</button>
-      </form>
+      
     </div>
-  {{/if}}
+    <div class="col-lg-6 p-2">
 
-  <div class="d-flex align-items-center mt-5">
-    <p class="lead me-5">Reviews:</p>
-    {{#if score}}
-      <p class="text-body-secondary">(event avg. rating: <b>{{score}}</b>)</span>
-    {{/if}}
-  </div>
 
-  {{#if hasLoggedIn}}
-    <form action="/event/{{event.id}}/comment" method="post" class="card w-25">
-      <p class="card-header">
-        Add your review:
-      </p>
-      <div class="card-body">
-        <label class="form-label" for="comment">
-          Comment:
-        </label>
-        <textarea name="comment" cols="30" id="comment" rows="4" class="form-control mb-3"></textarea>
-        <label class="form-label" for="rating">
-          Rating:
-        </label>
-        <select name="rating" id="rating" class="form-select form-select-sm mb-3">
-          <option value="">select rating</option>
-          <option value="5">5</option>
-          <option value="4">4</option>
-          <option value="3">3</option>
-          <option value="2">2</option>
-          <option value="1">1</option>
-        </select>
-        <button type="submit" class="btn btn-outline-primary btn-sm">Submit comment</button>
-      </div>
-    </form>
-  {{/if}}
+        {{#if hasLoggedIn}}
+          <form action="/user/profile/fav-event" method="post">
+            <input type="text" name="event" hidden value="{{event.id}}" />
+            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-heart me-2"></i>Add to favorites</button>
+          </form>
+        {{/if}}
 
-  {{#each event.review}}
-    <div class="card w-25 mb-3">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <strong class="me-">{{author.name}} {{author.surname}} - ({{rating}}/5)</strong>
-        <small>{{showDate date}}</small>
-      </div>
-      <div class="card-body">
-        <p class="card-text">
-          {{comment}}
-        </p>
-      </div>
+        {{#if isOrganiser}}
+          <div class="d-flex align-items-center border  p-3">
+            <p class="me-3 my-0"> For organiser:</p>
+            <a class="btn btn-outline-primary text-decoration-none btn-sm me-3 px-3" href="/event/{{event.id}}/edit">
+              Edit
+            </a>
+
+            <form action="/event/{{event.id}}/delete" method="post" class="my-0">
+              <button class="btn btn-danger text-decoration-none btn-sm" type="submit">Delete</button>
+            </form>
+          </div>
+        {{/if}}
+
+        <div class="d-flex align-items-center mt-5">
+          <p class="lead me-5">Reviews:</p>
+          {{#if score}}
+            <p class="text-body-secondary">(event avg. rating: <b>{{score}}</b>)</span>
+          {{/if}}
+        </div>
+
+          {{#each event.review}}
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong class="me-">{{author.name}} {{author.surname}} - ({{rating}}/5)</strong>
+              <small>{{showDate date}}</small>
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                {{comment}}
+              </p>
+            </div>
+          </div>
+
+        {{/each}}
+
+        {{#if hasLoggedIn}}
+          <form action="/event/{{event.id}}/comment" method="post" class="card ">
+            <p class="card-header">
+              Add your review:
+            </p>
+            <div class="card-body">
+              <label class="form-label" for="comment">
+                Comment:
+              </label>
+              <textarea name="comment" cols="30" id="comment" rows="4" class="form-control mb-3"></textarea>
+              <label class="form-label" for="rating">
+                Rating:
+              </label>
+              <select name="rating" id="rating" class="form-select form-select-sm mb-3">
+                <option value="">select rating</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+              <button type="submit" class="btn btn-outline-primary btn-sm">Submit comment</button>
+            </div>
+          </form>
+        {{/if}}
+
+      
     </div>
-
-  {{/each}}
+  </div> 
 </section>
